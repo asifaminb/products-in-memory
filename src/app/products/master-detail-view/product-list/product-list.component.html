@@ -1,0 +1,5 @@
+<ul *ngIf="products$ | async as products">
+  <li *ngFor="let product of products">
+    <button (click)="onProductSelect(product.id)">{{product.productName}} ({{product.category}})</button>
+  </li>
+</ul>

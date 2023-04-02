@@ -1,0 +1,35 @@
+<div *ngIf="selectedProduct$ | async as selectedProduct">
+  <p>{{selectedProduct.productName}}</p>
+  <p>{{selectedProduct.productCode}}</p>
+  <p>{{selectedProduct.category}}</p>
+  <p>{{selectedProduct.description}}</p>
+  <p>{{selectedProduct.supplierIds}}</p>
+
+
+
+ <ng-container *ngIf="selectedSupplier$ | async as suppliers">
+   <table class="table mb-0"
+          *ngIf="suppliers.length; else noSuppliers">
+     <thead>
+     <tr>
+       <th>Supplier</th>
+       <th>Cost</th>
+       <th>Minimum Quantity</th>
+     </tr>
+     </thead>
+     <tbody>
+     <tr *ngFor="let supplier of suppliers">
+       <td>{{ supplier.name }}</td>
+       <td>{{ supplier.cost | currency: "USD":"symbol":"1.2-2" }}</td>
+       <td>{{ supplier.minQuantity }}</td>
+     </tr>
+     </tbody>
+   </table>
+ </ng-container>
+
+  <ng-template #noSuppliers>
+    <div class="alert alert-warning">
+      No suppliers for product
+    </div>
+  </ng-template>
+</div>
